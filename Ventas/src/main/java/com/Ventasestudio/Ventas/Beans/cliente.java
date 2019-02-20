@@ -7,8 +7,10 @@ import javax.persistence.Id;
 @Entity
 public class cliente {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)  
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
+    private String user;
+    private String correo;
     private String nombre;
     private String Apellido;
     private String direccion;
@@ -43,5 +45,21 @@ public class cliente {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 }

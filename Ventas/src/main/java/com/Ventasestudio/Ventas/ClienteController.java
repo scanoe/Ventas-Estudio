@@ -11,12 +11,15 @@ public class ClienteController {
 @Autowired
 private ClienteRepositorio  clien;
 @PostMapping("/In")
-public @ResponseBody  String addcliente(@RequestParam String nombre,@RequestParam String apellido,@RequestParam String direccion) throws Exception{
+public @ResponseBody  String addcliente(@RequestParam String nombre,@RequestParam String apellido,@RequestParam String direccion,
+                                        @RequestParam String correo,@RequestParam String user) throws Exception{
     try{
     cliente cli =new cliente();
     cli.setNombre(nombre);
     cli.setApellido(apellido);
     cli.setDireccion(direccion);
+    cli.setUser(user);
+    cli.setCorreo(correo);
         clien.save(cli);
     return "Guardado";}
     catch(Exception e){
@@ -25,6 +28,10 @@ public @ResponseBody  String addcliente(@RequestParam String nombre,@RequestPara
     }
 
 }
-
+@PostMapping("/cdu")
+public @ResponseBody String delclienteXuser(@RequestParam String user){
+clien.deleteByUser(user);
+return "Borrado Exitoso";
+}
 
 }

@@ -8,4 +8,6 @@ public interface ClienteRepositorio extends CrudRepository<cliente,Integer>{
 
     @Transactional
     void deleteByUser(String user);
+    cliente findByUser(String user);
 }
+

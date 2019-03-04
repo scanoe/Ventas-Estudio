@@ -1,19 +1,23 @@
 package com.Ventasestudio.Ventas.Beans;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class cliente {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+
+
     private Integer id;
     private String user;
     private String correo;
     private String nombre;
     private String Apellido;
     private String direccion;
+
+
+    @OneToMany(mappedBy="cliente", cascade= {CascadeType.ALL}, fetch=FetchType.LAZY)
+    private List<orden> ordenes;
 
     public Integer getId() {
         return id;

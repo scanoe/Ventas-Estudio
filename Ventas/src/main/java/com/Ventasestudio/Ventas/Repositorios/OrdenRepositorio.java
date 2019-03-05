@@ -13,6 +13,6 @@ public interface OrdenRepositorio extends CrudRepository <orden,Integer> {
      List<orden> ordenesXcliente(@Param("clienteid") Integer clienteid);
 
     @Query("SELECT o FROM orden o left join cliente c on c.id = o.cliente WHERE c.id =:clienteid AND o.Estado ='Activa'")
-     List<orden> ordenClienteActiva(@Param("clienteid") Integer clienteid);
+    List<orden> ordenClienteActiva(@Param("clienteid") Integer clienteid);
 
 }

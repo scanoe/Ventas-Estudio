@@ -2,6 +2,7 @@ package com.Ventasestudio.Ventas.Beans;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class orden {
@@ -12,8 +13,12 @@ public class orden {
     @JoinColumn(name="cliente", nullable=false)
     private cliente cliente;
     @Temporal(TemporalType.DATE)
-    Date  fecha;
+    private Date  fecha;
+
     private String Estado;
+
+    @OneToMany(mappedBy="orden", cascade= {CascadeType.ALL}, fetch=FetchType.LAZY)
+    private List<productoxorden> prods;
 
     public Integer getId() {
         return id;

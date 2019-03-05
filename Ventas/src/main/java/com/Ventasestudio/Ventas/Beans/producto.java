@@ -1,10 +1,9 @@
 package com.Ventasestudio.Ventas.Beans;
 
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.List;
+
 @Entity
 public class producto {
     @Id
@@ -13,6 +12,9 @@ public class producto {
     private String nombre;
     private String descripcion;
     private Integer cantidad;
+
+    @OneToMany(mappedBy="producto", cascade= {CascadeType.ALL}, fetch=FetchType.LAZY)
+    private List <productoxorden> prods;
 
     public Integer getId() {
         return id;

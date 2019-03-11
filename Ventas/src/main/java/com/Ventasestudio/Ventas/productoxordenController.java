@@ -63,10 +63,12 @@ public class productoxordenController {
              op.setProducto(p);
              op.setOrden(o);
              op.setId(id);
+             p.setCantidad(p.getCantidad()-cant);
 
 
 
              try {
+                 prod.save(p);
                  prord.save(op);
              }catch(Exception e){
                  return e.getMessage();
@@ -82,4 +84,35 @@ public class productoxordenController {
 
 
     }
+
+    @PostMapping("/upcant")
+    public String upcant(@RequestParam Integer  Producto,@RequestParam String User,@RequestParam Integer cant){
+        cliente c = cli.findByUser(User);
+        orden o = ord.ordenClienteActiva(c.getId()).get(0);
+
+        producto p = prod.findById(Producto).get();
+        Idproductoxorden id = new Idproductoxorden();
+                id.setOrdenID(o.getId());
+                id.setProductoID(p.getId());
+        productoxorden pr = prord.findById(id);
+
+
+        if(pr.getCantidad() > cant){
+            p.setCantidad(p.getCantidad()+(pr.getCantidad()-cant));
+            prod.save(p);
+            pr.setCantidad(cant);
+            prord.save(pr);
+
+        }else if (pr.getCantidad() < cant){
+            p.setCantidad(p.getCantidad()-(cant-pr.getCantidad()));
+            prod.save(p);
+            pr.setCantidad(cant);
+            prord.save(pr);
+
+        }
+
+        return "Cantidad actualizada";
+    }
+
+
 }
